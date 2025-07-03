@@ -32,7 +32,7 @@ resource "aws_key_pair" "ssh-key" {
 resource "aws_security_group" "standard_sg" {
   name        = "standard-sg"
   description = "Allow users to ssh , send http and https request"
-
+  vpc_id      = aws_vpc.bastion_vpc.id
   dynamic "ingress" {
     for_each = [22, 80, 443]
     iterator = port
@@ -56,7 +56,7 @@ resource "aws_security_group" "standard_sg" {
 resource "aws_security_group" "only_ssh" {
   name        = "ssh-sg"
   description = "Allow users to ssh into machine"
-
+  vpc_id      = aws_vpc.bastion_vpc.id
   ingress {
     from_port   = 22
     description = "ssh-only"
