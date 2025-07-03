@@ -1,4 +1,5 @@
 resource "aws_instance" "public_mumbai_ec2" {
+  depends_on             = [aws_subnet.subnets]
   for_each               = toset(data.aws_subnets.mumbai_public_subnet_ids.ids)
   key_name               = aws_key_pair.ssh-key.key_name
   ami                    = "ami-0f918f7e67a3323f0"
@@ -11,6 +12,7 @@ resource "aws_instance" "public_mumbai_ec2" {
   }
 }
 resource "aws_instance" "private_mumbai_ec2" {
+  depends_on             = [aws_subnet.subnets]
   for_each               = toset(data.aws_subnets.mumbai_private_subnet_ids.ids)
   key_name               = aws_key_pair.ssh-key.key_name
   ami                    = "ami-0f918f7e67a3323f0"

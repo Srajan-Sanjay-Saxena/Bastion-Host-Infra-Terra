@@ -20,7 +20,7 @@ resource "aws_route_table" "private_rt" {
 resource "aws_default_route_table" "default_public_rt" {
   default_route_table_id = aws_vpc.bastion_vpc.main_route_table_id
   tags = {
-    Name = "public-rt"
+    Name = "public-route-table-${aws_vpc.bastion_vpc.id}"
   }
   route {
     cidr_block = "0.0.0.0/0"
