@@ -1,0 +1,35 @@
+name: Terraform Format Check
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**/*.tf"
+
+jobs:
+  terraform-fmt:
+    name: Check Terraform Formatting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: latest
+
+      - name: Run terraform fmt
+        run: terraform fmt --recursive
+
+      - name: Verify Formatting
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "✖ Terraform files are not properly formatted."
+            echo "💡 Please run 'terraform fmt --recursive' locally and commit the changes."
+            exit 1
+          else
+            echo "✓ All Terraform files are properly formatted."
+          fi
