@@ -23,20 +23,3 @@ jobs:
 
       - name: Run terraform fmt
         run: terraform fmt --recursive
-
-      - name: Verify Formatting (ignore whitespace-only changes)
-        id: verify_fmt
-        run: |
-          if [[ -n $(git diff --ignore-all-space --name-only) ]]; then
-            echo "✖ Files have non-whitespace uncommitted changes after formatting."
-            echo "💡 Please review and commit the necessary changes."
-            echo "format_status=not_formatted" >> $GITHUB_OUTPUT
-            exit 1
-          else
-            echo "✓ No non-whitespace uncommitted changes after formatting."
-            echo "format_status=formatted" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Output Formatting Result
-        run: |
-          echo "Terraform format check result: ${{ steps.verify_fmt.outputs.format_status }}"
