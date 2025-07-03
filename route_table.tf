@@ -39,7 +39,7 @@ resource "aws_route_table_association" "public_association" {
   depends_on     = [aws_subnet.subnets]
   for_each       = toset(data.aws_subnets.mumbai_public_subnet_ids.ids)
   subnet_id      = each.value
-  route_table_id = aws_default_route_table.default_public_rt
+  route_table_id = aws_default_route_table.default_public_rt.id
 }
 
 # Associate each private subnet with the private route table (default)
