@@ -14,7 +14,7 @@ data "aws_subnets" "mumbai_private_subnet_ids" {
 resource "aws_route_table" "private_rt" {
   vpc_id = aws_vpc.bastion_vpc.id
   tags = {
-    Name = "private-route-table-${count.index}"
+    Name = "private-route-table-${aws_vpc.bastion_vpc.id}"
   }
 }
 resource "aws_default_route_table" "default_public_rt" {
