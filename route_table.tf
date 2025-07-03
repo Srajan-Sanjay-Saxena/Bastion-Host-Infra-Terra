@@ -12,7 +12,6 @@ data "aws_subnets" "mumbai_private_subnet_ids" {
   }
 }
 resource "aws_route_table" "private_rt" {
-  count  = length(toset(data.aws_subnets.mumbai_private_subnet_ids.ids))
   vpc_id = aws_vpc.bastion_vpc.id
   tags = {
     Name = "private-route-table-${count.index}"
