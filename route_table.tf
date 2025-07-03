@@ -28,7 +28,9 @@ resource "aws_route_table" "public_rt" {
   }
 }
 # Associate each public subnet with the public route table
+# without adding depends_on i was not getting explicit association of subnets
 resource "aws_route_table_association" "public_association" {
+    depends_on = [ aws_subnet.subnets ]
   for_each       = toset(data.aws_subnets.mumbai_public_subnet_ids.ids)
   subnet_id      = each.value
   route_table_id = aws_route_table.public_rt.id
@@ -36,6 +38,7 @@ resource "aws_route_table_association" "public_association" {
 
 # Associate each private subnet with the private route table (default)
 resource "aws_route_table_association" "private_association" {
+    depends_on = [ aws_subnet.subnets ]
   for_each       = toset(data.aws_subnets.mumbai_private_subnet_ids.ids)
   subnet_id      = each.value
   route_table_id = aws_default_route_table.private_rt.id

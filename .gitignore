@@ -1,5 +1,13 @@
 .env
-.terraform
+# Terraform directories
+.terraform/
+
+# State files
+terraform.tfstate
+terraform.tfstate.backup
+
+# Lock file (optional if you commit it)
 .terraform.lock.hcl
-.terraform.tfstate.backup
-.terraform.tfstate
+
+# Crash log (rare)
+crash.log
