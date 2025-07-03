@@ -1,4 +1,4 @@
-name: Terraform Auto Format
+name: Terraform Format Check
 
 on:
   push:
@@ -7,12 +7,9 @@ on:
     paths:
       - "**/*.tf"
 
-permissions:
-  contents: write
-
 jobs:
   terraform-fmt:
-    name: Auto Format Terraform Code
+    name: Check Terraform Formatting
     runs-on: ubuntu-latest
 
     steps:
@@ -24,19 +21,5 @@ jobs:
         with:
           terraform_version: latest
 
-      - name: Format Terraform Code
-        run: terraform fmt -recursive -list=true -write=true
-
-      - name: Show Git Status
-        run: git status
-
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-
-      - name: Commit and Push Changes
-        run: |
-          git add -u
-          git diff --cached --quiet || git commit -m "Auto-format Terraform files"
-          git push
+      - name: Check Terraform Formatting
+        run: terraform fmt -check -diff -recursive
