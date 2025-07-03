@@ -15,6 +15,7 @@ This project scaffolds a secure and scalable **AWS VPC** infrastructure with:
 - 🛡️ Secure connectivity using **SSH via Bastion**
 
 ---
+![Bastion](https://excalidraw.com/?element=w0Hes-9eTHQDEmwcQMGqb)
 
 ## 📐 Architecture Diagram
 
