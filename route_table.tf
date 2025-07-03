@@ -47,5 +47,5 @@ resource "aws_route_table_association" "private_association" {
   depends_on     = [aws_subnet.subnets]
   for_each       = toset(data.aws_subnets.mumbai_private_subnet_ids.ids)
   subnet_id      = each.value
-  route_table_id = aws_route_table.private_rt
+  route_table_id = aws_route_table.private_rt.id
 }
