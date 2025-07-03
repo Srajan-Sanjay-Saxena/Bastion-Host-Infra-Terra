@@ -1,5 +1,5 @@
 resource "aws_eip" "nat_eips" {
-  count = length(toset(data.aws_subnets.mumbai_public_subnet_ids.ids))
+  count  = length(toset(data.aws_subnets.mumbai_public_subnet_ids.ids))
   domain = "vpc"
 }
 

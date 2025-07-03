@@ -19,19 +19,19 @@ resource "aws_route_table" "private_rt" {
   }
 }
 resource "aws_default_route_table" "default_public_rt" {
-    default_route_table_id = aws_vpc.bastion_vpc.main_route_table_id
+  default_route_table_id = aws_vpc.bastion_vpc.main_route_table_id
   tags = {
     Name = "public-rt"
   }
-route {
+  route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.bastion_ig.id
-}
-route {
+  }
+  route {
     cidr_block = local.vpc_cidr_block
     gateway_id = "local"
 
-}
+  }
 }
 # Associate each public subnet with the public route table
 # without adding depends_on i was not getting explicit association of subnets
