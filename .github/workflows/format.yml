@@ -22,4 +22,4 @@ jobs:
           terraform_version: latest
 
       - name: Run terraform fmt
-        run: terraform fmt --recursive
+        run: terraform fmt 

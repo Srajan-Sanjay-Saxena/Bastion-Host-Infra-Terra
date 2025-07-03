@@ -1,11 +1,11 @@
 resource "aws_subnet" "subnets" {
-  for_each = local.subnets_data
-  vpc_id = each.value.vpc_id
-  cidr_block = each.value.subnet_cidr
-  availability_zone = each.value.availability_zone
+  for_each                = local.subnets_data
+  vpc_id                  = each.value.vpc_id
+  cidr_block              = each.value.subnet_cidr
+  availability_zone       = each.value.availability_zone
   map_public_ip_on_launch = each.value.map_public_ip_on_launch
   tags = {
-    Name = "subnet-${each.value.availability_zone}"
+    Name   = "subnet-${each.value.availability_zone}"
     Public = each.value.map_public_ip_on_launch
   }
 }

@@ -5,6 +5,6 @@ variable "vpc_cidr_block" {
 variable "mumbai_subnets" {
   type = list(object({
     availability_zone = string
-    is_public = bool
+    is_public         = bool
   }))
 }
