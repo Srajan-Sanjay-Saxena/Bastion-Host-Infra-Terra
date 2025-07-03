@@ -1,6 +1,5 @@
 locals {
   vpc_cidr_block = aws_vpc.bastion_vpc.cidr_block
-
   subnets_data = {
     for idx, info in var.mumbai_subnets :
     "subnet-${info.availability_zone}" => 
