@@ -12,4 +12,13 @@ locals {
     }
 
   }
+
+  public_subnet_map = {
+    for idx, subnet_id in data.aws_subnets.mumbai_public_subnet_ids.ids :
+    "subnet-${idx}" => subnet_id
+  }
+  private_subnet_map = {
+    for idx, subnet_id in data.aws_subnets.mumbai_private_subnet_ids.ids :
+    "subnet-${idx}" => subnet_id
+  }
 }

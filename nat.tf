@@ -4,6 +4,7 @@ resource "aws_eip" "nat_eips" {
 }
 
 resource "aws_nat_gateway" "nat" {
+  depends_on    = [aws_subnet.subnets]
   count         = length(toset(data.aws_subnets.mumbai_public_subnet_ids.ids))
   allocation_id = aws_eip.nat_eips[count.index].id
   subnet_id     = data.aws_subnets.mumbai_public_subnet_ids.ids[count.index]
